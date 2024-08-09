@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios'
 import debounce from 'lodash.debounce';
 
-
 function App() {
   const [crypto, setCrypto] = useState('');
   const [img, setImg] = useState('');
@@ -23,12 +22,10 @@ function App() {
     try {
       const res = await axios.get(url);
       const resData = res.data;
-
       setCache((prevCache) => ({
         ...prevCache,
         [cryptoName]: resData,
       }));
-
       setImg(resData.image.large);
       setName(resData.name);
       setSymbol(resData.symbol);
@@ -37,31 +34,26 @@ function App() {
       setUsd(`US price : $${resData.market_data.current_price.usd}`);
       setDesc(resData.description.en);
       setError('');
-    }
-
-    catch (error) {
+    } catch (error) {
       if (error.response && error.response.status === 404) {
         setError('Cryptocurrency not found. Please check the name and try again.');
       } else {
         setError('An error occurred. Please try again later.');
       }
-    }
-
-    finally {
+    } finally {
       setLoading(false);
     }
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => { 
     event.preventDefault();
     if (!crypto.trim()) {
       setError('Please enter a cryptocurrency name.');
       return;
     }
-
     setLoading(true);
     setError('');
-
+    
     if (cache[crypto]) {
       const resData = cache[crypto];
       setImg(resData.image.large);
@@ -72,9 +64,7 @@ function App() {
       setUsd(`US price : $${resData.market_data.current_price.usd}`);
       setDesc(resData.description.en);
       setLoading(false);
-    }
-
-    else {
+    } else {
       fetchCryptoData(crypto);
     }
   };
@@ -118,7 +108,9 @@ function App() {
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-secondary px-5 mt-4">Submit</button>
+              <button type="submit" className="btn btn-secondary px-5 mt-4">
+                Submit
+              </button>
             </form>
             {loading && <div className="mt-4">Loading...</div>}
             {error && <div className="alert alert-danger mt-4">{error}</div>}
@@ -132,7 +124,12 @@ function App() {
               <h2>{symbol}</h2>
               {link && (
                 <h2>
-                  <a className="text-white" href={link} target="_blank" rel="noopener noreferrer">
+                  <a
+                    className="text-white"
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {link}
                   </a>
                 </h2>

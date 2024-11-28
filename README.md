@@ -28,3 +28,14 @@ A React.js application to search and display details about various cryptocurrenc
 - Description
 - Homepage link
 
+## Screenshots
+![Screenshot 2024-11-28 164922](https://github.com/user-attachments/assets/a6382230-40bc-43f4-b545-dc117520df08)
+
+## Error Handling
+- If the cryptocurrency is not found, an error message is displayed: "Cryptocurrency not found. Please check the name and try again."
+- If there's an issue with the API or network, a generic error message is shown: "An error occurred. Please try again later."
+
+## Optimizations
+- Debounced Input : Reduces unnecessary API calls by waiting for 500ms after the user stops typing.
+- Caching : Previously searched cryptocurrency data is stored in memory to avoid redundant API requests.
+
